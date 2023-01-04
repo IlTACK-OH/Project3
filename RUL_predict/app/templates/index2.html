@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+  </head>
+  <body>
+    <nav class="navbar navbar-dark bg-dark shadow-sm">
+      <div class="container-fluid">
+        <a href="http://rulpredict.pythonanywhere.com" class="navbar-brand d-flex align-items-center">
+          <img src="https://zeevector.com/wp-content/uploads/Ge-Logo-PNG-Black-and-White-387x258.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
+          <strong>&nbsp&nbspRUL Predict</strong>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="http://rulpredict.pythonanywhere.com/dashboard">Dashboard</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="http://rulpredict.pythonanywhere.com/predict">Predict</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <section class="py-5 text-center container">
+        <div class="row py-lg-5">
+          <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light">RUL Predict System</h1>
+          </div>
+          <div style="text-align : center;">
+            {% if 50>predict_value and predict_value>=40 %}
+            <img src="https://www.sae.org/binaries/content/gallery/cm/articles/news/2018/07/ge_azure.jpg" style="width:450; height:300px">
+            <br>
+            <p class="lead text-muted">예측된 잔여수명</p>
+            <br>
+            <h1>{{predict_value}}</h1>
+            <p><strong>엔진의 성능저하가 나타날 수 있으므로 정비를 권장함.</strong></p>
+            {% endif %}
+            {% if 40>predict_value and predict_value>=30 %}
+            <img src="https://ids.si.edu/ids/deliveryService?id=NASM-A19610121002_AER01&max=900" style="width:450; height:300px">
+            <br>
+            <p class="lead text-muted">예측된 잔여수명</p>
+            <br>
+            <h1 class="text-warning">{{predict_value}}</h1>
+            <h2>비행 중 엔진에 문제가 발생할 수 있음.<br><strong class="text-warning">정비를 강력히 권고함.</strong></h2>
+            {% endif %}
+            {% if 30>predict_value %}
+            <img src="https://wimg.mk.co.kr/meet/neds/2019/02/image_readtop_2019_83043_15498648623631914.jpg" style="width:450; height:300px">
+            <br>
+            <p class="lead text-muted">예측된 잔여수명</p>
+            <br>
+            <h1 class="text-danger">{{predict_value}}</h1>
+            <h2 class="text-danger">필히 정비를 수행할 것.</h2>
+            {% endif %}
+            {% if predict_value>50 %}
+            <img src="https://www.sae.org/binaries/content/gallery/cm/articles/news/2018/07/ge_azure.jpg" style="width:450; height:300px">
+            <br>
+            <p class="lead text-muted">예측된 잔여수명</p>
+            <br>
+            <h1 class="text-success">{{predict_value}}</h1>
+            <h2><strong class="text-success">안 전 제 일</strong><br> 충분한 수명이 남아있음.</h2>
+            {% endif %}
+            <br>
+          </div>
+        </div>
+        <form class="row g-3" action="/predict" method="GET">
+          <div class="col-12">
+            <button class="btn btn-primary" type="submit">Reset</button>
+          </div>
+        </div>
+        </form>
+    </section>
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+  </body>
+</html>
